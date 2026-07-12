@@ -6,7 +6,7 @@ Scroll-driven "camera travel" portfolio showcasing AI/ML expertise, projects, an
 
 ## Features
 
-- **Dark/Light theme toggle** with localStorage persistence
+- **Dark sci-fi HUD theme** (single-theme, tuned for the V.E.C.T.O.R. aesthetic)
 - **Scroll-driven camera** that zooms and pans across a 5200×8200 "world"
 - **Plexus network background** (animated particle system with connection lines)
 - **Responsive design** (mobile-first fallback to plain vertical layout)
@@ -57,7 +57,7 @@ npx serve .
 ```
 index.html          — all content and structure
 css/style.css       — theming (CSS variables), layout, components
-js/main.js          — scroll camera, plexus animation, theme toggle, nav
+js/main.js          — scroll camera, plexus animation, nav
 resume.pdf          — downloadable resume
 README.md           — this file
 ```
@@ -79,9 +79,8 @@ README.md           — this file
 - **Journey height**: `.scrollspace { height: 780vh }` in CSS (more = slower scroll)
 
 ### Modify theme colors
-- **Dark theme tokens** (default): `:root[data-theme="dark"]` in `css/style.css`
-- **Light theme tokens**: `:root[data-theme="light"]` in `css/style.css`
-- All values use CSS variables (e.g., `--accent`, `--bg`, `--text`)
+- All tokens live in `:root` at the top of `css/style.css`
+- Everything derives from CSS variables (e.g., `--accent`, `--bg`, `--text`)
 
 ## Browser Support
 

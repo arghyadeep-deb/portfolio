@@ -1,6 +1,5 @@
-/* ===== Arghyadeep Deb — Portfolio ===== */
-/* Theme tokens */
-:root[data-theme="dark"] {
+/* ===== Arghyadeep Deb — Portfolio (dark-only) ===== */
+:root {
   --bg: #04070D;
   --bg-viewport: radial-gradient(ellipse 120% 90% at 50% 0%, #081120 0%, #04070D 60%);
   --panel: rgba(7, 13, 23, 0.82);
@@ -18,24 +17,6 @@
   --star1: rgba(255, 255, 255, 0.1);
   --star2: rgba(255, 255, 255, 0.07);
 }
-:root[data-theme="light"] {
-  --bg: #F5F2EA;
-  --bg-viewport: radial-gradient(ellipse 130% 100% at 50% 0%, #FAF8F2 0%, #F0EBDF 70%);
-  --panel: rgba(251, 249, 244, 0.9);
-  --card: #FBF9F4;
-  --line: rgba(26, 25, 23, 0.2);
-  --line-soft: rgba(26, 25, 23, 0.18);
-  --accent: #0E7490;
-  --accent-rgb: 14, 116, 144;
-  --text: #1A1917;
-  --text-2: #57534A;
-  --text-3: #6E6A60;
-  --chip-border: rgba(26, 25, 23, 0.25);
-  --panel-shadow: 0 24px 60px rgba(26, 25, 23, 0.12);
-  --grid-line: rgba(26, 25, 23, 0.05);
-  --star1: rgba(26, 25, 23, 0.1);
-  --star2: rgba(26, 25, 23, 0.07);
-}
 
 * { box-sizing: border-box; }
 html { background: var(--bg); }
@@ -43,6 +24,8 @@ body {
   margin: 0;
   background: var(--bg);
   font-family: 'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 ::selection { background: rgba(var(--accent-rgb), 0.25); }
 ::-webkit-scrollbar { width: 4px; }
@@ -54,12 +37,14 @@ a:hover { color: var(--text); }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spinrev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 
 /* ===== Layout scaffold ===== */
 .scrollspace { height: 780vh; background: var(--bg); }
 .viewport {
   position: fixed; inset: 0; overflow: hidden;
   background: var(--bg-viewport);
+  animation: fadein 0.7s ease-out;
 }
 #plexus { position: absolute; inset: 0; width: 100%; height: 100%; }
 .world {
@@ -149,7 +134,11 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 1px; background: var(--line); border: 1px solid var(--line);
 }
-.module { background: var(--card); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px; }
+.module {
+  background: var(--card); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px;
+  transition: background 0.25s;
+}
+.module:hover { background: rgba(var(--accent-rgb), 0.05); }
 .module .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--accent); }
 .module .name { font-size: 16px; font-weight: 600; color: var(--text); }
 .module .desc { font-size: 13.5px; line-height: 1.5; color: var(--text-3); }
@@ -165,7 +154,9 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
 .card {
   border: 1px solid var(--line); background: var(--card);
   padding: 28px; display: flex; flex-direction: column; gap: 12px;
+  transition: border-color 0.25s, transform 0.25s;
 }
+.card:hover { border-color: rgba(var(--accent-rgb), 0.45); transform: translateY(-3px); }
 .card header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .card h3 { margin: 0; font-family: 'Rajdhani', sans-serif; font-size: 30px; font-weight: 600; color: var(--text); }
 .card .badge { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--accent); text-align: right; }
@@ -190,6 +181,16 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
   padding: 24px 0; border-top: 1px solid var(--line-soft);
 }
 .xp-row:last-child { border-bottom: 1px solid var(--line-soft); }
+.certs { display: flex; flex-direction: column; gap: 14px; }
+.certs-head {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.25em;
+  color: var(--accent);
+}
+.cert-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.cert-list span {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.5;
+  color: var(--text-3); border: 1px solid var(--chip-border); padding: 6px 12px;
+}
 .xp-when { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.1em; }
 .xp-role { font-size: 20px; font-weight: 600; color: var(--text); display: block; margin-bottom: 6px; }
 .xp-desc { font-size: 15px; line-height: 1.6; color: var(--text-2); }
@@ -208,7 +209,9 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
 .skill-tags span {
   font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.04em;
   color: var(--text-2); border: 1px solid var(--chip-border); padding: 7px 14px;
+  transition: border-color 0.2s, color 0.2s;
 }
+.skill-tags span:hover { border-color: var(--accent); color: var(--text); }
 .skill-tags .hi {
   color: var(--accent); border-color: rgba(var(--accent-rgb), 0.55);
   background: rgba(var(--accent-rgb), 0.06);
@@ -245,12 +248,13 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
 }
 .topbar .brand { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.25em; color: var(--text-3); }
 .topbar .brand b { color: var(--accent); font-weight: 400; }
-.theme-toggle {
+.resume-btn {
   font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.2em;
-  color: var(--text-3); background: none; border: 1px solid var(--chip-border);
-  padding: 8px 14px; cursor: pointer; pointer-events: auto;
+  color: var(--accent); background: none; border: 1px solid rgba(var(--accent-rgb), 0.5);
+  padding: 8px 14px; text-decoration: none; pointer-events: auto;
+  transition: background 0.2s, color 0.2s;
 }
-.theme-toggle:hover { color: var(--text); border-color: var(--text); }
+.resume-btn:hover { background: var(--accent); color: var(--bg); }
 
 .navbar {
   position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
@@ -302,4 +306,6 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .ring { animation: none; }
   .scroll-cue { animation: none; }
+  .viewport { animation: none; }
+  .card, .module, .skill-tags span { transition: none; }
 }

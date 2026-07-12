@@ -1,4 +1,4 @@
-/* ===== Arghyadeep Deb — Portfolio: scroll camera + plexus + theme ===== */
+/* ===== Arghyadeep Deb — Portfolio: scroll camera + plexus ===== */
 (function () {
   'use strict';
 
@@ -11,30 +11,11 @@
     { id: 'sec-skills',     z: 0.98 },
     { id: 'sec-contact',    z: 1.15 }
   ];
-  var SCRUB = 1.2;
+  var SCRUB = 1.6;
   var tl = null;
   var raf = null;
   var isMobile = function () { return window.matchMedia('(max-width: 820px)').matches; };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Theme ---------- */
-  function applyTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    var btn = document.getElementById('themeToggle');
-    if (btn) btn.textContent = t === 'dark' ? 'LIGHT MODE' : 'DARK MODE';
-    var brand = document.getElementById('brandTheme');
-    if (brand) brand.textContent = '/ ' + t.toUpperCase();
-    try { localStorage.setItem('portfolio-theme', t); } catch (e) {}
-  }
-  window.toggleTheme = function () {
-    var cur = document.documentElement.getAttribute('data-theme') || 'dark';
-    applyTheme(cur === 'dark' ? 'light' : 'dark');
-  };
-  (function initTheme() {
-    var saved = null;
-    try { saved = localStorage.getItem('portfolio-theme'); } catch (e) {}
-    applyTheme(saved === 'light' ? 'light' : 'dark');
-  })();
 
   /* ---------- Camera helpers ---------- */
   function accentRGB() {
@@ -112,27 +93,33 @@
     var c = document.getElementById('plexus');
     if (!c || reduced || isMobile()) return;
     var ctx = c.getContext('2d');
-    function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+    var W = 0, H = 0;
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      c.width = W * dpr; c.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
     resize();
     window.addEventListener('resize', resize);
     var N = 70;
     var pts = [];
     for (var i = 0; i < N; i++) {
       pts.push({
-        x: Math.random() * c.width, y: Math.random() * c.height,
+        x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
         r: 1 + Math.random() * 1.6
       });
     }
+    var rgb = accentRGB();
     function step() {
-      var rgb = accentRGB();
-      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.clearRect(0, 0, W, H);
       var R = 150, i, j, p;
       for (i = 0; i < N; i++) {
         p = pts[i];
         p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > c.width) p.vx *= -1;
-        if (p.y < 0 || p.y > c.height) p.vy *= -1;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
       }
       for (i = 0; i < N; i++) {
         for (j = i + 1; j < N; j++) {
