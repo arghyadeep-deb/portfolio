@@ -1,36 +1,93 @@
 # Arghyadeep Deb — Portfolio
 
-Scroll-driven "camera travel" portfolio. Vanilla HTML/CSS/JS + GSAP ScrollTrigger (CDN) — no build step needed.
+**Live:** https://arghyadeep-deb.github.io
 
-## Structure
+Scroll-driven "camera travel" portfolio showcasing AI/ML expertise, projects, and experience. Built with vanilla HTML/CSS/JS + GSAP ScrollTrigger (no build step needed).
 
-```
-index.html      — all content (sections live inside the #world container)
-css/style.css   — themes (dark/light via CSS variables), layout, components
-js/main.js      — scroll camera, plexus background, nav, theme toggle
-```
+## Features
 
-## Run locally
+- **Dark/Light theme toggle** with localStorage persistence
+- **Scroll-driven camera** that zooms and pans across a 5200×8200 "world"
+- **Plexus network background** (animated particle system with connection lines)
+- **Responsive design** (mobile-first fallback to plain vertical layout)
+- **No dependencies** beyond GSAP (loaded via CDN)
+- **SEO-ready** (Open Graph, Twitter Cards, JSON-LD schema)
+- **Accessible** (ARIA labels, screen reader hidden decorative elements)
 
-Just open `index.html` in a browser, or serve the folder:
+## Project Links
 
-```
+- **AI Financial Advisor** — Multi-agent financial advisory with Graph-RAG
+  - [GitHub](https://github.com/arghyadeep-deb/AI-Financial-Advisor)
+  - Tech: LangGraph, Graph-RAG, FastAPI, Streamlit
+
+- **Credit Scoring System** — Hybrid ML/DL credit risk prediction
+  - [GitHub](https://github.com/arghyadeep-deb/Credit-Scoring-System)
+  - Tech: XGBoost, PyTorch, SHAP, FastAPI
+
+- **Grove** — Agentic thinking & memory tool (internship, under NDA)
+
+## Run Locally
+
+Open `index.html` directly in a browser, or serve via HTTP:
+
+```bash
 npx serve .
+# Then open http://localhost:3000
 ```
 
 ## Deploy to GitHub Pages
 
-1. Create a repo (e.g. `portfolio` or `<username>.github.io`)
-2. Push these files to the repo root
-3. Repo Settings → Pages → Source: `main` branch, `/ (root)`
-4. Done — live at `https://<username>.github.io/<repo>/`
+### If hosting at `username.github.io/portfolio`:
 
-## Editing
+1. Create a repo named `portfolio`
+2. Push all files to `main` branch
+3. Go to **Settings → Pages**
+4. Select **Source:** `Deploy from a branch`
+5. Branch: `main`, Folder: `/ (root)`
+6. Save — live in ~2 minutes at `https://username.github.io/portfolio/`
 
-- **Content**: edit the `<section>` blocks in `index.html`.
-- **Section positions**: `#sec-*` rules in `css/style.css` (coordinates inside the 5200×8200 world). Keep the journey vertical by keeping every section horizontally centered around x = 2600.
-- **Camera stops**: `KEYFRAMES` in `js/main.js` (`z` = zoom per section). The camera auto-centers on each section element.
-- **Scroll feel**: `SCRUB` in `js/main.js` (lower = snappier, higher = floatier); `.scrollspace` height in CSS (more vh = slower journey).
-- **Themes**: token blocks at the top of `css/style.css`. Toggle persists via localStorage.
+### If hosting at `username.github.io` (personal site):
 
-Mobile (≤820px) falls back to a plain vertical document flow — no camera, no canvas.
+1. Create a repo named `username.github.io`
+2. Push all files to `main` branch
+3. Pages auto-enables — live at `https://username.github.io/`
+
+## File Structure
+
+```
+index.html          — all content and structure
+css/style.css       — theming (CSS variables), layout, components
+js/main.js          — scroll camera, plexus animation, theme toggle, nav
+resume.pdf          — downloadable resume
+README.md           — this file
+```
+
+## Customization
+
+### Edit content
+- Sections live inside `<section id="sec-*" class="sec">` in `index.html`
+- Update text, links, project details directly
+
+### Change section positions
+- Each section has CSS rules: `#sec-hero`, `#sec-vector`, etc. in `css/style.css`
+- Positions are absolute coordinates in a 5200×8200 world
+- Keep sections horizontally centered at x=2600 to maintain vertical journey line
+
+### Adjust camera zoom/speed
+- **Camera zoom per section**: `KEYFRAMES` array in `js/main.js` (z value)
+- **Scroll speed**: `SCRUB` constant (lower = snappier, higher = floatier)
+- **Journey height**: `.scrollspace { height: 780vh }` in CSS (more = slower scroll)
+
+### Modify theme colors
+- **Dark theme tokens** (default): `:root[data-theme="dark"]` in `css/style.css`
+- **Light theme tokens**: `:root[data-theme="light"]` in `css/style.css`
+- All values use CSS variables (e.g., `--accent`, `--bg`, `--text`)
+
+## Browser Support
+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile: iOS Safari 14+, Chrome Android
+
+Desktop (≥820px) uses the scroll-camera experience. Mobile (≤820px) falls back to a plain vertical document flow.
