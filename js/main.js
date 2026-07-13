@@ -46,7 +46,7 @@
     update();
   }
 
-  /* ---------- Scroll reveals (tracking-in headings + fade-up content) ---------- */
+  /* ---------- Scroll reveals (replay every time a section enters view) ---------- */
   function initReveals() {
     if (!window.gsap || !window.ScrollTrigger || reduced) return;
     gsap.registerPlugin(ScrollTrigger);
@@ -54,21 +54,37 @@
       var sec = document.getElementById(id);
       if (!sec) return;
       var h = sec.querySelector('h2');
-      if (h) {
-        gsap.fromTo(h,
-          { opacity: 0, letterSpacing: '0.28em', filter: 'blur(8px)' },
-          { opacity: 1, letterSpacing: getComputedStyle(h).letterSpacing, filter: 'blur(0px)',
-            duration: 0.9, ease: 'power2.out',
-            scrollTrigger: { trigger: sec, start: 'top 75%', once: true } });
-      }
+      var ls = h ? getComputedStyle(h).letterSpacing : null;
       var kids = Array.prototype.filter.call(sec.children, function (el) { return el !== h; });
-      if (kids.length) {
-        gsap.fromTo(kids,
-          { opacity: 0, y: 28 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power2.out',
-            scrollTrigger: { trigger: sec, start: 'top 75%', once: true } });
+
+      function reset() {
+        if (h) { gsap.killTweensOf(h); gsap.set(h, { opacity: 0, letterSpacing: '0.26em', filter: 'blur(8px)' }); }
+        if (kids.length) { gsap.killTweensOf(kids); gsap.set(kids, { opacity: 0, y: 26 }); }
       }
+      function play() {
+        if (h) {
+          gsap.killTweensOf(h);
+          gsap.fromTo(h,
+            { opacity: 0, letterSpacing: '0.26em', filter: 'blur(8px)' },
+            { opacity: 1, letterSpacing: ls, filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' });
+        }
+        if (kids.length) {
+          gsap.killTweensOf(kids);
+          gsap.fromTo(kids,
+            { opacity: 0, y: 26 },
+            { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out' });
+        }
+      }
+
+      reset();
+      ScrollTrigger.create({
+        trigger: sec, start: 'top 80%', end: 'bottom 15%',
+        onEnter: play, onEnterBack: play, onLeave: reset, onLeaveBack: reset
+      });
     });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+    }
   }
 
   /* ---------- Plexus background ---------- */
