@@ -71,6 +71,14 @@
       tl.to(world, { x: cam(KEYFRAMES[i], secs[i]).x, y: cam(KEYFRAMES[i], secs[i]).y, scale: cam(KEYFRAMES[i], secs[i]).scale, duration: 1, ease: reduced ? 'none' : 'power2.inOut' });
       tl.to(secs[i - 1], { opacity: 0.28, duration: 0.35 }, '<');
       tl.to(secs[i], { opacity: 1, duration: 0.5 }, '<0.4');
+      var h = secs[i].querySelector('h2');
+      if (h && !reduced) {
+        gsap.set(h, { clearProps: 'letterSpacing,filter,opacity' });
+        tl.fromTo(h,
+          { opacity: 0, letterSpacing: '0.28em', filter: 'blur(8px)' },
+          { opacity: 1, letterSpacing: getComputedStyle(h).letterSpacing, filter: 'blur(0px)', duration: 0.55, ease: 'power2.out' },
+          '<0.05');
+      }
       tl.to({}, { duration: 0.45 });
     }
   }
