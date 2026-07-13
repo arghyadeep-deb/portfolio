@@ -1,6 +1,6 @@
 # Arghyadeep Deb — Portfolio
 
-**Live:** https://arghyadeep-deb.github.io
+**Live:** https://arghyadeep-deb.github.io/portfolio/
 
 Single-page dark portfolio showcasing AI/ML expertise, projects, and experience — vertical flow with scroll-reveal animations and an interactive drag-to-spin network globe. Vanilla HTML/CSS/JS + GSAP ScrollTrigger (no build step needed).
 
