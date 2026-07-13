@@ -2,12 +2,13 @@
 
 **Live:** https://arghyadeep-deb.github.io
 
-Scroll-driven "camera travel" portfolio showcasing AI/ML expertise, projects, and experience. Built with vanilla HTML/CSS/JS + GSAP ScrollTrigger (no build step needed).
+Single-page dark portfolio showcasing AI/ML expertise, projects, and experience — vertical flow with scroll-reveal animations and an interactive drag-to-spin network globe. Vanilla HTML/CSS/JS + GSAP ScrollTrigger (no build step needed).
 
 ## Features
 
 - **Dark sci-fi HUD theme** (single-theme, tuned for the V.E.C.T.O.R. aesthetic)
-- **Scroll-driven camera** that zooms and pans across a 5200×8200 "world"
+- **Interactive network globe** in the hero (canvas, drag to spin, auto-rotates)
+- **Scroll-reveal animations** — tracking-in headings and staggered fade-up content
 - **Plexus network background** (animated particle system with connection lines)
 - **Responsive design** (mobile-first fallback to plain vertical layout)
 - **No dependencies** beyond GSAP (loaded via CDN)
@@ -57,7 +58,7 @@ npx serve .
 ```
 index.html          — all content and structure
 css/style.css       — theming (CSS variables), layout, components
-js/main.js          — scroll camera, plexus animation, nav
+js/main.js          — scroll reveals, plexus, network globe, nav
 resume.pdf          — downloadable resume
 README.md           — this file
 ```
@@ -68,15 +69,10 @@ README.md           — this file
 - Sections live inside `<section id="sec-*" class="sec">` in `index.html`
 - Update text, links, project details directly
 
-### Change section positions
-- Each section has CSS rules: `#sec-hero`, `#sec-vector`, etc. in `css/style.css`
-- Positions are absolute coordinates in a 5200×8200 world
-- Keep sections horizontally centered at x=2600 to maintain vertical journey line
-
-### Adjust camera zoom/speed
-- **Camera zoom per section**: `KEYFRAMES` array in `js/main.js` (z value)
-- **Scroll speed**: `SCRUB` constant (lower = snappier, higher = floatier)
-- **Journey height**: `.scrollspace { height: 780vh }` in CSS (more = slower scroll)
+### Adjust animations
+- **Reveal triggers**: `initReveals()` in `js/main.js` (`start: 'top 75%'`)
+- **Globe**: `startGlobe()` in `js/main.js` (point count, rotation speed, drag sensitivity)
+- **Section spacing**: `main { gap: 150px }` in `css/style.css`
 
 ### Modify theme colors
 - All tokens live in `:root` at the top of `css/style.css`
@@ -89,4 +85,4 @@ README.md           — this file
 - Safari 14+
 - Mobile: iOS Safari 14+, Chrome Android
 
-Desktop (≥820px) uses the scroll-camera experience. Mobile (≤820px) falls back to a plain vertical document flow.
+Fully responsive; on mobile (≤820px) the plexus background and globe are disabled for performance.

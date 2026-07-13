@@ -37,242 +37,219 @@
 </head>
 <body>
 
-<div id="scrollspace" class="scrollspace">
-  <div class="viewport">
+<div class="bg" aria-hidden="true"></div>
+<canvas id="plexus" aria-hidden="true"></canvas>
 
-    <canvas id="plexus" aria-hidden="true"></canvas>
+<header class="topbar">
+  <div class="brand">ARGHYADEEP.DEB <b>/ ONLINE</b></div>
+  <a class="resume-btn" href="resume.pdf" target="_blank" rel="noopener">RESUME ↓</a>
+</header>
 
-    <!-- THE WORLD -->
-    <div id="world" class="world">
+<main>
 
-      <!-- journey line -->
-      <svg class="journey" width="5200" height="9200" viewBox="0 0 5200 9200" aria-hidden="true">
-        <path d="M2600 780 L2600 8350" fill="none" stroke="var(--accent)" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="4 14"></path>
-        <circle cx="2600" cy="780" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="2050" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="3500" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="4800" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="6100" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="7150" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-        <circle cx="2600" cy="8350" r="7" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="1.5"></circle>
-      </svg>
-
-      <!-- HUD rings -->
-      <div class="ring ring--1" aria-hidden="true"><svg width="380" height="380" viewBox="0 0 380 380"><circle cx="190" cy="190" r="184" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="60 24 8 24"></circle><circle cx="190" cy="190" r="150" fill="none" stroke="var(--accent)" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 18"></circle><circle cx="190" cy="190" r="110" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="110 460"></circle></svg></div>
-      <div class="ring ring--2" aria-hidden="true"><svg width="520" height="520" viewBox="0 0 520 520"><circle cx="260" cy="260" r="254" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="90 40 10 40"></circle><circle cx="260" cy="260" r="200" fill="none" stroke="var(--accent)" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="160 640"></circle><circle cx="260" cy="260" r="6" fill="var(--accent)" fill-opacity="0.6"></circle></svg></div>
-      <div class="ring ring--3" aria-hidden="true"><svg width="300" height="300" viewBox="0 0 300 300"><circle cx="150" cy="150" r="144" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="40 20 6 20"></circle><circle cx="150" cy="150" r="100" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="80 330"></circle></svg></div>
-      <div class="ring ring--4" aria-hidden="true"><svg width="420" height="420" viewBox="0 0 420 420"><circle cx="210" cy="210" r="204" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="70 30 8 30"></circle><circle cx="210" cy="210" r="160" fill="none" stroke="var(--accent)" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 16"></circle><circle cx="210" cy="210" r="120" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="120 500"></circle></svg></div>
-      <div class="ring ring--5" aria-hidden="true"><svg width="340" height="340" viewBox="0 0 340 340"><circle cx="170" cy="170" r="164" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="50 22 7 22"></circle><circle cx="170" cy="170" r="120" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="95 400"></circle><circle cx="170" cy="170" r="5" fill="var(--accent)" fill-opacity="0.6"></circle></svg></div>
-      <div class="ring ring--6" aria-hidden="true"><svg width="460" height="460" viewBox="0 0 460 460"><circle cx="230" cy="230" r="224" fill="none" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="80 34 9 34"></circle><circle cx="230" cy="230" r="180" fill="none" stroke="var(--accent)" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 17"></circle><circle cx="230" cy="230" r="130" fill="none" stroke="var(--accent)" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="130 540"></circle></svg></div>
-
-      <!-- 01 HERO -->
-      <section id="sec-hero" class="sec sec--center">
-        <div class="kicker kicker--rule">KIIT · CSE '27 · AI/ML · CGPA 8.55</div>
-        <h1>Arghyadeep Deb</h1>
-        <p class="lede">I build <span style="color: var(--text);">local-first, self-evolving AI systems</span> — multi-agent orchestration, Graph-RAG, and infrastructure I own outright.</p>
-        <div class="chip-row">
-          <span class="chip">GUWAHATI → BHUBANESWAR</span>
-          <span class="chip">EN · HI · BN · AS · 日本語 (LEARNING)</span>
-        </div>
-        <div class="scroll-cue">▼ SCROLL</div>
-      </section>
-
-      <!-- 02 V.E.C.T.O.R. -->
-      <section id="sec-vector" class="sec sec--boxed">
-        <div class="kicker">FLAGSHIP / 01 — IN ACTIVE DEVELOPMENT</div>
-        <h2 class="xl">V.E.C.T.O.R.</h2>
-        <div class="mono-sub">VIRTUAL ENTITY FOR COGNITIVE TASKS &amp; OPERATIONAL REASONING</div>
-        <p class="sub">An autonomous multi-agent AI system built solo from the ground up — a governed city of specialized agents that sense, decide, act, and evolve, with every action passing through a permission layer.</p>
-        <div class="modules">
-          <div class="module"><span class="tag">M-01</span><span class="name">Agent city</span><span class="desc">40+ specialized districts — research, coding, finance, security, ops</span></div>
-          <div class="module"><span class="tag">M-02</span><span class="name">Agent evolution</span><span class="desc">Darwinian selection — performance-based HP, council governance</span></div>
-          <div class="module"><span class="tag">M-03</span><span class="name">Decision engine</span><span class="desc">Actions chosen by multi-candidate scoring, not single LLM calls</span></div>
-          <div class="module"><span class="tag">M-04</span><span class="name">Permission gateway</span><span class="desc">Every action risk-tiered GREEN / YELLOW / RED before execution</span></div>
-          <div class="module"><span class="tag">M-05</span><span class="name">Memory &amp; reflection</span><span class="desc">Nightly consolidation, self-review, and pattern extraction</span></div>
-          <div class="module"><span class="tag">M-06</span><span class="name">Ambient sensing</span><span class="desc">Always-on edge node running on a repurposed phone</span></div>
-          <div class="module"><span class="tag">M-07</span><span class="name">Device control</span><span class="desc">Hands-free control of PC and phone by voice and chat</span></div>
-          <div class="module"><span class="tag">M-08</span><span class="name">Self-evolution</span><span class="desc">Updates itself safely with rollback</span></div>
-        </div>
-      </section>
-
-      <!-- 03 PROJECTS -->
-      <section id="sec-projects" class="sec sec--boxed">
-        <div class="kicker">SELECTED WORK / 02</div>
-        <h2>Shipped &amp; Building</h2>
-        <div class="cards">
-          <article class="card">
-            <header><h3>Grove</h3><span class="badge">INTERNSHIP · NDA</span></header>
-            <p>Ground-up Python/FastAPI rewrite of a TypeScript thinking-and-memory tool, spec'd across versioned build plans v1.1 → v1.3. Internship project at Cygnatrix — code under NDA.</p>
-            <div class="tags"><span>LangGraph</span><span>LightRAG</span><span>Graphiti</span><span>Neo4j</span><span>Supabase</span></div>
-          </article>
-          <article class="card">
-            <header><h3>AI Financial Advisor</h3><span class="badge">DEPLOYED · RENDER</span></header>
-            <p>Multi-agent advisory system with vectorless Graph-RAG and age-differentiated stock recommendations. Official college mini-project.</p>
-            <div class="tags"><span>LangGraph</span><span>Graph-RAG</span><span>Groq</span><span>Gemini</span><span>Streamlit</span></div>
-            <div class="links"><a href="https://github.com/arghyadeep-deb/AI-Financial-Advisor" target="_blank" rel="noopener">CODE ↗</a></div>
-          </article>
-          <article class="card">
-            <header><h3>Credit Scoring System</h3><span class="badge">HYBRID ML + DL</span></header>
-            <p>XGBoost/LightGBM blended with PyTorch, SHAP explainability, real-time and batch inference over FastAPI.</p>
-            <div class="tags"><span>XGBoost</span><span>PyTorch</span><span>SHAP</span><span>FastAPI</span></div>
-            <div class="links"><a href="https://github.com/arghyadeep-deb/Credit-Scoring-System" target="_blank" rel="noopener">CODE ↗</a></div>
-          </article>
-          <article class="card">
-            <header><h3>Hybrid Movie Recommender</h3><span class="badge">CONTENT + COLLABORATIVE</span></header>
-            <p>Recommendation engine blending content-based and collaborative filtering, served over FastAPI with response-latency optimization.</p>
-            <div class="tags"><span>scikit-learn</span><span>Pandas</span><span>FastAPI</span></div>
-            <div class="links"><a href="https://github.com/arghyadeep-deb/Hybrid-Movie-Recommender-System" target="_blank" rel="noopener">CODE ↗</a></div>
-          </article>
-        </div>
-      </section>
-
-      <!-- 04 EXPERIENCE -->
-      <section id="sec-experience" class="sec sec--boxed">
-        <div class="kicker">EXPERIENCE / 03</div>
-        <h2>Field Log</h2>
-        <div>
-          <div class="xp-row">
-            <div class="xp-when">MAY — JUL 2026</div>
-            <div><span class="xp-role">AI Intern — Cygnatrix</span><span class="xp-desc">GenAI and Agentic AI-focused work; where Grove was built.</span></div>
-          </div>
-          <div class="xp-row">
-            <div class="xp-when">JUL — SEP 2025</div>
-            <div><span class="xp-role">ML Intern — Intrainz</span><span class="xp-desc">EDA, regression modeling, PCA, and structured ML pipelines.</span></div>
-          </div>
-          <div class="xp-row">
-            <div class="xp-when">MAY — JUN 2025</div>
-            <div><span class="xp-role">Intern — State Bank of India (SBILD)</span><span class="xp-desc">Data-driven customer profiling and lending insights at institutional scale.</span></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 05 SKILLS -->
-      <section id="sec-skills" class="sec sec--boxed">
-        <div class="kicker">CAPABILITIES / 04</div>
-        <h2>Skills &amp; Tech</h2>
-        <div class="skill-grid">
-          <div class="skill-box">
-            <div class="head">PROGRAMMING &amp; CORE</div>
-            <div class="skill-tags">
-              <span>Python</span>
-              <span>FastAPI</span>
-              <span>SQL / MySQL</span>
-              <span>Data Structures &amp; Algorithms</span>
-            </div>
-          </div>
-          <div class="skill-box">
-            <div class="head">LLM ORCHESTRATION</div>
-            <div class="skill-tags">
-              <span>LangChain / LangGraph</span>
-              <span>RAG &amp; Graph-RAG</span>
-              <span>Multi-agent systems</span>
-              <span>MCP</span>
-              <span>Ollama (local-first)</span>
-            </div>
-          </div>
-          <div class="skill-box">
-            <div class="head">ML / DL FRAMEWORKS</div>
-            <div class="skill-tags">
-              <span>scikit-learn</span>
-              <span>PyTorch</span>
-              <span>TensorFlow</span>
-              <span>LangSmith (observability)</span>
-            </div>
-          </div>
-          <div class="skill-box">
-            <div class="head">TOOLS &amp; PLATFORMS</div>
-            <div class="skill-tags">
-              <span>Git / GitHub</span>
-              <span>Docker</span>
-              <span>Power BI</span>
-              <span>Supabase</span>
-              <span>Neo4j</span>
-              <span>Redis</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 06 CERTIFICATIONS -->
-      <section id="sec-certs" class="sec sec--boxed">
-        <div class="kicker">CREDENTIALS / 05</div>
-        <h2>Certifications</h2>
-        <div class="cert-links">
-          <a href="https://drive.google.com/file/d/1eWENGagSUY539hpn7QN4Aqom1b4sfOZf/view?usp=drive_link" target="_blank" rel="noopener">
-            <span class="issuer">IBM</span>
-            <span class="cname">Deep Learning &amp; Neural Networks with Keras</span>
-            <span class="cyear">2026 ↗</span>
-          </a>
-          <a href="https://drive.google.com/file/d/12U96ipyn7eU6GsDN9xZ1fXKzURxfHS1h/view?usp=drive_link" target="_blank" rel="noopener">
-            <span class="issuer">INTRAINZ</span>
-            <span class="cname">Machine Learning</span>
-            <span class="cyear">2025 ↗</span>
-          </a>
-          <a href="https://drive.google.com/file/d/1ufiAX9fxBX8CVl0oiojHp5-glLgByz4T/view?usp=sharing" target="_blank" rel="noopener">
-            <span class="issuer">ORACLE</span>
-            <span class="cname">AI Foundations &amp; Generative AI</span>
-            <span class="cyear">2025 ↗</span>
-          </a>
-          <a href="https://drive.google.com/file/d/1yIg-YTTme1z7A9Svk-wBGYmL3bl_wBTm/view?usp=sharing" target="_blank" rel="noopener">
-            <span class="issuer">ORACLE</span>
-            <span class="cname">Data Science Professional</span>
-            <span class="cyear">2024 ↗</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 07 CONTACT -->
-      <section id="sec-contact" class="sec sec--boxed sec--center">
-        <div class="kicker">END OF TRANSMISSION / 06</div>
-        <h2 class="xl" style="text-transform: uppercase;">Let's Connect</h2>
-        <p class="sub" style="max-width: 560px; font-size: 18px;">Open to AI/ML roles, internships, and research collaborations.</p>
-        <div class="connect">
-          <a href="mailto:arghyadeepdeb020703@gmail.com">
-            <span class="ic">@</span>
-            <span class="txt"><span class="lbl">EMAIL</span><span class="val">arghyadeepdeb020703@gmail.com</span></span>
-          </a>
-          <a href="tel:+919090119755">
-            <span class="ic">✆</span>
-            <span class="txt"><span class="lbl">PHONE</span><span class="val">+91 90901 19755</span></span>
-          </a>
-          <a href="https://www.linkedin.com/in/arghyadeep-deb" target="_blank" rel="noopener">
-            <span class="ic">in</span>
-            <span class="txt"><span class="lbl">LINKEDIN</span><span class="val">/in/arghyadeep-deb ↗</span></span>
-          </a>
-          <a href="https://github.com/arghyadeep-deb" target="_blank" rel="noopener">
-            <span class="ic">&lt;/&gt;</span>
-            <span class="txt"><span class="lbl">GITHUB</span><span class="val">github.com/arghyadeep-deb ↗</span></span>
-          </a>
-          <a href="resume.pdf" target="_blank" rel="noopener">
-            <span class="ic">▤</span>
-            <span class="txt"><span class="lbl">RESUME</span><span class="val">Download PDF ↗</span></span>
-          </a>
-        </div>
-      </section>
-
+  <!-- 01 HERO -->
+  <section id="sec-hero" class="sec sec--hero">
+    <div class="globe-wrap" aria-hidden="true">
+      <canvas id="globe"></canvas>
+      <div class="globe-label">DRAG TO SPIN</div>
     </div>
-
-    <!-- fixed chrome -->
-    <div class="topbar">
-      <div class="brand">ARGHYADEEP.DEB <b>/ ONLINE</b></div>
-      <a class="resume-btn" href="resume.pdf" target="_blank" rel="noopener">RESUME ↓</a>
+    <div class="kicker kicker--rule">KIIT · CSE '27 · AI/ML · CGPA 8.55</div>
+    <h1>Arghyadeep Deb</h1>
+    <p class="lede">I build <span style="color: var(--text);">local-first, self-evolving AI systems</span> — multi-agent orchestration, Graph-RAG, and infrastructure I own outright.</p>
+    <div class="chip-row">
+      <span class="chip">GUWAHATI → BHUBANESWAR</span>
+      <span class="chip">EN · HI · BN · AS · 日本語 (LEARNING)</span>
     </div>
+    <div class="scroll-cue">▼ SCROLL</div>
+  </section>
 
-    <nav class="navbar" aria-label="Section navigation">
-      <button data-navdot onclick="goTo(0)"><span class="dot"></span><span class="lbl">INTRO</span></button>
-      <button data-navdot onclick="goTo(1)"><span class="dot"></span><span class="lbl">V.E.C.T.O.R.</span></button>
-      <button data-navdot onclick="goTo(2)"><span class="dot"></span><span class="lbl">PROJECTS</span></button>
-      <button data-navdot onclick="goTo(3)"><span class="dot"></span><span class="lbl">EXPERIENCE</span></button>
-      <button data-navdot onclick="goTo(4)"><span class="dot"></span><span class="lbl">SKILLS</span></button>
-      <button data-navdot onclick="goTo(5)"><span class="dot"></span><span class="lbl">CERTS</span></button>
-      <button data-navdot onclick="goTo(6)"><span class="dot"></span><span class="lbl">CONTACT</span></button>
-    </nav>
+  <!-- 02 V.E.C.T.O.R. -->
+  <section id="sec-vector" class="sec sec--boxed">
+    <div class="kicker">FLAGSHIP / 01 — IN ACTIVE DEVELOPMENT</div>
+    <h2 class="xl">V.E.C.T.O.R.</h2>
+    <div class="mono-sub">VIRTUAL ENTITY FOR COGNITIVE TASKS &amp; OPERATIONAL REASONING</div>
+    <p class="sub">An autonomous multi-agent AI system built solo from the ground up — a governed city of specialized agents that sense, decide, act, and evolve, with every action passing through a permission layer.</p>
+    <div class="modules">
+      <div class="module"><span class="tag">M-01</span><span class="name">Agent city</span><span class="desc">40+ specialized districts — research, coding, finance, security, ops</span></div>
+      <div class="module"><span class="tag">M-02</span><span class="name">Agent evolution</span><span class="desc">Darwinian selection — performance-based HP, council governance</span></div>
+      <div class="module"><span class="tag">M-03</span><span class="name">Decision engine</span><span class="desc">Actions chosen by multi-candidate scoring, not single LLM calls</span></div>
+      <div class="module"><span class="tag">M-04</span><span class="name">Permission gateway</span><span class="desc">Every action risk-tiered GREEN / YELLOW / RED before execution</span></div>
+      <div class="module"><span class="tag">M-05</span><span class="name">Memory &amp; reflection</span><span class="desc">Nightly consolidation, self-review, and pattern extraction</span></div>
+      <div class="module"><span class="tag">M-06</span><span class="name">Ambient sensing</span><span class="desc">Always-on edge node running on a repurposed phone</span></div>
+      <div class="module"><span class="tag">M-07</span><span class="name">Device control</span><span class="desc">Hands-free control of PC and phone by voice and chat</span></div>
+      <div class="module"><span class="tag">M-08</span><span class="name">Self-evolution</span><span class="desc">Updates itself safely with rollback</span></div>
+    </div>
+  </section>
 
-    <div class="progress-track"><div id="progressbar"></div></div>
-    <div id="sectionlabel">01 / INTRO</div>
+  <!-- 03 PROJECTS -->
+  <section id="sec-projects" class="sec sec--boxed">
+    <div class="kicker">SELECTED WORK / 02</div>
+    <h2>Shipped &amp; Building</h2>
+    <div class="cards">
+      <article class="card">
+        <header><h3>Grove</h3><span class="badge">INTERNSHIP · NDA</span></header>
+        <p>Ground-up Python/FastAPI rewrite of a TypeScript thinking-and-memory tool, built across versioned plans v1.1 → v1.3. Internship project at Cygnatrix — code under NDA.</p>
+        <div class="tags"><span>LangGraph</span><span>LightRAG</span><span>Graphiti</span><span>Neo4j</span><span>Supabase</span></div>
+      </article>
+      <article class="card">
+        <header><h3>AI Financial Advisor</h3><span class="badge">DEPLOYED · RENDER</span></header>
+        <p>Multi-agent advisory system with vectorless Graph-RAG and age-differentiated stock recommendations. Official college mini-project.</p>
+        <div class="tags"><span>LangGraph</span><span>Graph-RAG</span><span>Groq</span><span>Gemini</span><span>Streamlit</span></div>
+        <div class="links"><a href="https://github.com/arghyadeep-deb/AI-Financial-Advisor" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+      <article class="card">
+        <header><h3>Credit Scoring System</h3><span class="badge">HYBRID ML + DL</span></header>
+        <p>XGBoost/LightGBM blended with PyTorch, SHAP explainability, real-time and batch inference over FastAPI.</p>
+        <div class="tags"><span>XGBoost</span><span>PyTorch</span><span>SHAP</span><span>FastAPI</span></div>
+        <div class="links"><a href="https://github.com/arghyadeep-deb/Credit-Scoring-System" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+      <article class="card">
+        <header><h3>Hybrid Movie Recommender</h3><span class="badge">CONTENT + COLLABORATIVE</span></header>
+        <p>Recommendation engine blending content-based and collaborative filtering, served over FastAPI with response-latency optimization.</p>
+        <div class="tags"><span>scikit-learn</span><span>Pandas</span><span>FastAPI</span></div>
+        <div class="links"><a href="https://github.com/arghyadeep-deb/Hybrid-Movie-Recommender-System" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+    </div>
+  </section>
 
-  </div>
-</div>
+  <!-- 04 EXPERIENCE -->
+  <section id="sec-experience" class="sec sec--boxed">
+    <div class="kicker">EXPERIENCE / 03</div>
+    <h2>Field Log</h2>
+    <div>
+      <div class="xp-row">
+        <div class="xp-when">MAY — JUL 2026</div>
+        <div><span class="xp-role">AI Intern — Cygnatrix</span><span class="xp-desc">GenAI and Agentic AI-focused work; where Grove was built.</span></div>
+      </div>
+      <div class="xp-row">
+        <div class="xp-when">JUL — SEP 2025</div>
+        <div><span class="xp-role">ML Intern — Intrainz</span><span class="xp-desc">EDA, regression modeling, PCA, and structured ML pipelines.</span></div>
+      </div>
+      <div class="xp-row">
+        <div class="xp-when">MAY — JUN 2025</div>
+        <div><span class="xp-role">Intern — State Bank of India (SBILD)</span><span class="xp-desc">Data-driven customer profiling and lending insights at institutional scale.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 SKILLS -->
+  <section id="sec-skills" class="sec sec--boxed">
+    <div class="kicker">CAPABILITIES / 04</div>
+    <h2>Skills &amp; Tech</h2>
+    <div class="skill-grid">
+      <div class="skill-box">
+        <div class="head">PROGRAMMING &amp; CORE</div>
+        <div class="skill-tags">
+          <span>Python</span>
+          <span>FastAPI</span>
+          <span>SQL / MySQL</span>
+          <span>Data Structures &amp; Algorithms</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <div class="head">LLM ORCHESTRATION</div>
+        <div class="skill-tags">
+          <span>LangChain / LangGraph</span>
+          <span>RAG &amp; Graph-RAG</span>
+          <span>Multi-agent systems</span>
+          <span>MCP</span>
+          <span>Ollama (local-first)</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <div class="head">ML / DL FRAMEWORKS</div>
+        <div class="skill-tags">
+          <span>scikit-learn</span>
+          <span>PyTorch</span>
+          <span>TensorFlow</span>
+          <span>LangSmith (observability)</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <div class="head">TOOLS &amp; PLATFORMS</div>
+        <div class="skill-tags">
+          <span>Git / GitHub</span>
+          <span>Docker</span>
+          <span>Power BI</span>
+          <span>Supabase</span>
+          <span>Neo4j</span>
+          <span>Redis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 CERTIFICATIONS -->
+  <section id="sec-certs" class="sec sec--boxed">
+    <div class="kicker">CREDENTIALS / 05</div>
+    <h2>Certifications</h2>
+    <div class="cert-links">
+      <a href="https://drive.google.com/file/d/1eWENGagSUY539hpn7QN4Aqom1b4sfOZf/view?usp=drive_link" target="_blank" rel="noopener">
+        <span class="issuer">IBM</span>
+        <span class="cname">Deep Learning &amp; Neural Networks with Keras</span>
+        <span class="cyear">2026 ↗</span>
+      </a>
+      <a href="https://drive.google.com/file/d/12U96ipyn7eU6GsDN9xZ1fXKzURxfHS1h/view?usp=drive_link" target="_blank" rel="noopener">
+        <span class="issuer">INTRAINZ</span>
+        <span class="cname">Machine Learning</span>
+        <span class="cyear">2025 ↗</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1ufiAX9fxBX8CVl0oiojHp5-glLgByz4T/view?usp=sharing" target="_blank" rel="noopener">
+        <span class="issuer">ORACLE</span>
+        <span class="cname">AI Foundations &amp; Generative AI</span>
+        <span class="cyear">2025 ↗</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1yIg-YTTme1z7A9Svk-wBGYmL3bl_wBTm/view?usp=sharing" target="_blank" rel="noopener">
+        <span class="issuer">ORACLE</span>
+        <span class="cname">Data Science Professional</span>
+        <span class="cyear">2024 ↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 07 CONTACT -->
+  <section id="sec-contact" class="sec sec--boxed sec--center">
+    <div class="kicker">END OF TRANSMISSION / 06</div>
+    <h2 class="xl" style="text-transform: uppercase;">Let's Connect</h2>
+    <p class="sub" style="max-width: 560px; font-size: 18px;">Open to AI/ML roles, internships, and research collaborations.</p>
+    <div class="connect">
+      <a href="mailto:arghyadeepdeb020703@gmail.com">
+        <span class="ic">@</span>
+        <span class="txt"><span class="lbl">EMAIL</span><span class="val">arghyadeepdeb020703@gmail.com</span></span>
+      </a>
+      <a href="tel:+919090119755">
+        <span class="ic">✆</span>
+        <span class="txt"><span class="lbl">PHONE</span><span class="val">+91 90901 19755</span></span>
+      </a>
+      <a href="https://www.linkedin.com/in/arghyadeep-deb" target="_blank" rel="noopener">
+        <span class="ic">in</span>
+        <span class="txt"><span class="lbl">LINKEDIN</span><span class="val">/in/arghyadeep-deb ↗</span></span>
+      </a>
+      <a href="https://github.com/arghyadeep-deb" target="_blank" rel="noopener">
+        <span class="ic">&lt;/&gt;</span>
+        <span class="txt"><span class="lbl">GITHUB</span><span class="val">github.com/arghyadeep-deb ↗</span></span>
+      </a>
+      <a href="resume.pdf" target="_blank" rel="noopener">
+        <span class="ic">▤</span>
+        <span class="txt"><span class="lbl">RESUME</span><span class="val">Download PDF ↗</span></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar" aria-label="Section navigation">
+  <button data-navdot onclick="goTo(0)"><span class="dot"></span><span class="lbl">INTRO</span></button>
+  <button data-navdot onclick="goTo(1)"><span class="dot"></span><span class="lbl">V.E.C.T.O.R.</span></button>
+  <button data-navdot onclick="goTo(2)"><span class="dot"></span><span class="lbl">PROJECTS</span></button>
+  <button data-navdot onclick="goTo(3)"><span class="dot"></span><span class="lbl">EXPERIENCE</span></button>
+  <button data-navdot onclick="goTo(4)"><span class="dot"></span><span class="lbl">SKILLS</span></button>
+  <button data-navdot onclick="goTo(5)"><span class="dot"></span><span class="lbl">CERTS</span></button>
+  <button data-navdot onclick="goTo(6)"><span class="dot"></span><span class="lbl">CONTACT</span></button>
+</nav>
+
+<div class="progress-track"><div id="progressbar"></div></div>
+<div id="sectionlabel">01 / INTRO</div>
 
 <script defer src="js/main.js"></script>
 </body>
