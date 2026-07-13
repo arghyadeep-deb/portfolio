@@ -2,13 +2,14 @@
 (function () {
   'use strict';
 
-  var NAMES = ['INTRO', 'V.E.C.T.O.R.', 'PROJECTS', 'EXPERIENCE', 'SKILLS', 'CONTACT'];
+  var NAMES = ['INTRO', 'V.E.C.T.O.R.', 'PROJECTS', 'EXPERIENCE', 'SKILLS', 'CERTS', 'CONTACT'];
   var KEYFRAMES = [
     { id: 'sec-hero',       z: 1.0 },
     { id: 'sec-vector',     z: 0.95 },
     { id: 'sec-projects',   z: 0.9 },
     { id: 'sec-experience', z: 1.0 },
     { id: 'sec-skills',     z: 0.98 },
+    { id: 'sec-certs',      z: 1.05 },
     { id: 'sec-contact',    z: 1.15 }
   ];
   var SCRUB = 1.6;
