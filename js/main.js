@@ -46,10 +46,24 @@
     update();
   }
 
-  /* ---------- Scroll reveals (replay every time a section enters view) ---------- */
+  /* ---------- Scroll reveals (all headings identical; replay on entry) ---------- */
   function initReveals() {
     if (!window.gsap || !window.ScrollTrigger || reduced) return;
     gsap.registerPlugin(ScrollTrigger);
+
+    function hideHeading(h) { gsap.set(h, { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' }); }
+    function showHeading(h, ls) {
+      gsap.killTweensOf(h);
+      gsap.fromTo(h,
+        { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' },
+        { opacity: 1, letterSpacing: ls, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out' });
+    }
+
+    // Hero name: same animation as section headings, plays once on load
+    var hero = document.getElementById('sec-hero');
+    var h1 = hero ? hero.querySelector('h1') : null;
+    if (h1) showHeading(h1, getComputedStyle(h1).letterSpacing);
+
     IDS.slice(1).forEach(function (id) {
       var sec = document.getElementById(id);
       if (!sec) return;
@@ -58,20 +72,14 @@
       var kids = Array.prototype.filter.call(sec.children, function (el) { return el !== h; });
 
       function reset() {
-        if (h) { gsap.killTweensOf(h); gsap.set(h, { opacity: 0, letterSpacing: '0.26em', filter: 'blur(8px)' }); }
+        if (h) { gsap.killTweensOf(h); hideHeading(h); }
         if (kids.length) { gsap.killTweensOf(kids); gsap.set(kids, { opacity: 0, y: 26 }); }
       }
       function play() {
-        if (h) {
-          gsap.killTweensOf(h);
-          gsap.fromTo(h,
-            { opacity: 0, letterSpacing: '0.26em', filter: 'blur(8px)' },
-            { opacity: 1, letterSpacing: ls, filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' });
-        }
+        if (h) showHeading(h, ls);
         if (kids.length) {
           gsap.killTweensOf(kids);
-          gsap.fromTo(kids,
-            { opacity: 0, y: 26 },
+          gsap.fromTo(kids, { opacity: 0, y: 26 },
             { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out' });
         }
       }

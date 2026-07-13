@@ -102,11 +102,6 @@ h1 {
   margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700;
   font-size: clamp(44px, 9vw, 96px); line-height: 1; letter-spacing: 0.03em;
   color: var(--text); text-transform: uppercase; white-space: nowrap;
-  animation: name-in 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@keyframes name-in {
-  0%   { opacity: 0; letter-spacing: 0.28em; filter: blur(10px); }
-  100% { opacity: 1; letter-spacing: 0.03em; filter: blur(0); }
 }
 h2 {
   margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700;
@@ -311,6 +306,5 @@ h2.xl { font-size: clamp(40px, 6.5vw, 78px); letter-spacing: 0.05em; text-transf
   html { scroll-behavior: auto; }
   .scroll-cue { animation: none; }
   main { animation: none; }
-  h1 { animation: none; }
   .card, .module, .skill-tags span { transition: none; }
 }
