@@ -2,8 +2,8 @@
 (function () {
   'use strict';
 
-  var IDS = ['sec-hero', 'sec-vector', 'sec-projects', 'sec-experience', 'sec-skills', 'sec-certs', 'sec-contact'];
-  var NAMES = ['INTRO', 'V.E.C.T.O.R.', 'PROJECTS', 'EXPERIENCE', 'SKILLS', 'CERTS', 'CONTACT'];
+  var IDS = ['sec-hero', 'sec-about', 'sec-vector', 'sec-projects', 'sec-experience', 'sec-skills', 'sec-certs', 'sec-contact'];
+  var NAMES = ['INTRO', 'ABOUT', 'V.E.C.T.O.R.', 'PROJECTS', 'EXPERIENCE', 'SKILLS', 'CERTS', 'CONTACT'];
   var isMobile = function () { return window.matchMedia('(max-width: 820px)').matches; };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -49,6 +49,7 @@
   /* ---------- Scroll reveals (IntersectionObserver: reliable, replays on entry) ---------- */
   function initReveals() {
     if (reduced || !window.gsap || !window.IntersectionObserver) return;
+    // (called via whenGsap so window.gsap is guaranteed present here)
 
     function headingLS(h) { return h.getAttribute('data-ls') || getComputedStyle(h).letterSpacing; }
 
@@ -253,9 +254,16 @@
   }
 
   /* ---------- Boot ---------- */
+  function whenGsap(cb) {
+    if (window.gsap) return cb();
+    var n = 0;
+    var iv = setInterval(function () {
+      if (window.gsap || n++ > 100) { clearInterval(iv); cb(); }
+    }, 30);
+  }
   function boot() {
     initScrollUI();
-    initReveals();
+    whenGsap(initReveals);
     startPlexus();
     startGlobe();
   }
