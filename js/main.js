@@ -160,8 +160,8 @@
       var outer = makeSphere(120, 0.9);
       var inner = makeSphere(70, 0.86);
       var globes = [
-        { data: outer, R: S * 0.36, ph: 0.0, dot: 1.7, auto: false, spd: 0 },
-        { data: inner, R: S * 0.22, ph: 1.1, dot: 1.4, auto: true,  spd: 0.010 }
+        { data: outer, R: S * 0.42, ph: 0.0, dot: 1.9, auto: false, spd: 0 },
+        { data: inner, R: S * 0.27, ph: 1.1, dot: 1.5, auto: true,  spd: 0.010 }
       ];
 
       // rotation eased toward cursor
