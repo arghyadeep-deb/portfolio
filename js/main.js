@@ -124,77 +124,98 @@
     step();
   }
 
-  /* ---------- Network globe (drag to spin) ---------- */
+  /* ---------- Network globes (follow cursor, two nested spheres) ---------- */
   function startGlobe() {
     var c = document.getElementById('globe');
-    if (!c || isMobile() || c.clientWidth === 0) return;
-    var ctx = c.getContext('2d');
-    var S = c.clientWidth;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    c.width = S * dpr; c.height = S * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var rgb = accentRGB();
-    var N = 110, R = S * 0.36, F = S * 1.1;
-    var pts = [], i, j;
-    for (i = 0; i < N; i++) {
-      var y = 1 - (i / (N - 1)) * 2;
-      var rr = Math.sqrt(Math.max(0, 1 - y * y));
-      var th = i * 2.399963229728653;
-      pts.push({ x: Math.cos(th) * rr, y: y, z: Math.sin(th) * rr });
-    }
-    var edges = [];
-    for (i = 0; i < N; i++) {
-      for (j = i + 1; j < N; j++) {
-        var dot = pts[i].x * pts[j].x + pts[i].y * pts[j].y + pts[i].z * pts[j].z;
-        if (dot > 0.9) edges.push([i, j]);
-      }
-    }
-    var rx = -0.35, ry = 0, spin = 0;
-    var dragging = false, lx = 0, ly = 0;
-    c.addEventListener('pointerdown', function (e) {
-      dragging = true; lx = e.clientX; ly = e.clientY;
-      c.setPointerCapture(e.pointerId);
-    });
-    c.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      var dx = e.clientX - lx, dy = e.clientY - ly;
-      lx = e.clientX; ly = e.clientY;
-      ry += dx * 0.006;
-      rx = Math.max(-1.2, Math.min(1.2, rx + dy * 0.004));
-      spin = dx * 0.0006;
-    });
-    var stop = function () { dragging = false; };
-    c.addEventListener('pointerup', stop);
-    c.addEventListener('pointercancel', stop);
-    var proj = new Array(N);
-    function render() {
-      ctx.clearRect(0, 0, S, S);
-      var cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(rx), sx = Math.sin(rx);
+    if (!c) return;
+
+    function makeSphere(N, thresh) {
+      var pts = [], edges = [], i, j;
       for (i = 0; i < N; i++) {
-        var p = pts[i];
-        var x1 = p.x * cy + p.z * sy, z1 = -p.x * sy + p.z * cy;
-        var y1 = p.y * cx - z1 * sx, z2 = p.y * sx + z1 * cx;
-        var sc = F / (F - z2 * R);
-        proj[i] = { x: S / 2 + x1 * R * sc, y: S / 2 + y1 * R * sc, t: (z2 + 1) / 2 };
-      }
-      for (var k = 0; k < edges.length; k++) {
-        var a = proj[edges[k][0]], b = proj[edges[k][1]];
-        ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.05 + ((a.t + b.t) / 2) * 0.22).toFixed(3) + ')';
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        var y = 1 - (i / (N - 1)) * 2;
+        var rr = Math.sqrt(Math.max(0, 1 - y * y));
+        var th = i * 2.399963229728653;
+        pts.push({ x: Math.cos(th) * rr, y: y, z: Math.sin(th) * rr });
       }
       for (i = 0; i < N; i++) {
-        var q = proj[i];
-        ctx.fillStyle = 'rgba(' + rgb + ',' + (0.18 + q.t * 0.55).toFixed(3) + ')';
-        ctx.beginPath(); ctx.arc(q.x, q.y, 0.8 + q.t * 1.6, 0, 7); ctx.fill();
+        for (j = i + 1; j < N; j++) {
+          var dot = pts[i].x * pts[j].x + pts[i].y * pts[j].y + pts[i].z * pts[j].z;
+          if (dot > thresh) edges.push([i, j]);
+        }
       }
+      return { pts: pts, edges: edges };
     }
-    if (reduced) { render(); return; }
-    (function loop() {
-      if (!dragging) { ry += 0.0032 + spin; spin *= 0.96; }
-      render();
-      requestAnimationFrame(loop);
-    })();
+
+    function setup() {
+      var S = c.clientWidth;
+      if (S === 0) { requestAnimationFrame(setup); return; }
+      var ctx = c.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      c.width = S * dpr; c.height = S * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var rgb = accentRGB();
+      var F = S * 1.15;
+
+      // Outer + inner globe. Inner is smaller and phase-offset -> reads as two globes.
+      var outer = makeSphere(120, 0.9);
+      var inner = makeSphere(70, 0.86);
+      var globes = [
+        { data: outer, R: S * 0.36, ph: 0.0,  dot: 1.7, tilt: 0 },
+        { data: inner, R: S * 0.22, ph: 1.1,  dot: 1.4, tilt: 0.5 }
+      ];
+
+      // rotation eased toward cursor
+      var rx = -0.3, ry = 0, trx = -0.3, try_ = 0;
+      window.addEventListener('mousemove', function (e) {
+        var nx = (e.clientX / window.innerWidth) * 2 - 1;   // -1..1
+        var ny = (e.clientY / window.innerHeight) * 2 - 1;
+        try_ = nx * 0.9;
+        trx = -0.3 + ny * 0.7;
+      }, { passive: true });
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma == null) return;
+        try_ = Math.max(-1, Math.min(1, e.gamma / 45)) * 0.9;
+        trx = -0.3 + Math.max(-1, Math.min(1, (e.beta || 0) / 45)) * 0.7;
+      });
+
+      function drawGlobe(g, rxx, ryy) {
+        var d = g.data, R = g.R, proj = new Array(d.pts.length), i;
+        var ryG = ryy + g.ph, rxG = rxx + g.tilt * ryy * 0.3;
+        var cy = Math.cos(ryG), sy = Math.sin(ryG), cx = Math.cos(rxG), sx = Math.sin(rxG);
+        for (i = 0; i < d.pts.length; i++) {
+          var pnt = d.pts[i];
+          var x1 = pnt.x * cy + pnt.z * sy, z1 = -pnt.x * sy + pnt.z * cy;
+          var y1 = pnt.y * cx - z1 * sx, z2 = pnt.y * sx + z1 * cx;
+          var sc = F / (F - z2 * R);
+          proj[i] = { x: S / 2 + x1 * R * sc, y: S / 2 + y1 * R * sc, t: (z2 + 1) / 2 };
+        }
+        for (var k = 0; k < d.edges.length; k++) {
+          var a = proj[d.edges[k][0]], b = proj[d.edges[k][1]];
+          ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.04 + ((a.t + b.t) / 2) * 0.2).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        for (i = 0; i < proj.length; i++) {
+          var q = proj[i];
+          ctx.fillStyle = 'rgba(' + rgb + ',' + (0.16 + q.t * 0.55).toFixed(3) + ')';
+          ctx.beginPath(); ctx.arc(q.x, q.y, (0.7 + q.t * g.dot), 0, 7); ctx.fill();
+        }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, S, S);
+        for (var gi = 0; gi < globes.length; gi++) drawGlobe(globes[gi], rx, ry);
+      }
+
+      if (reduced) { render(); return; }
+      (function loop() {
+        rx += (trx - rx) * 0.06;
+        ry += (try_ - ry) * 0.06;
+        render();
+        requestAnimationFrame(loop);
+      })();
+    }
+    setup();
   }
 
   /* ---------- Boot ---------- */
