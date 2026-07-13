@@ -46,36 +46,25 @@
     update();
   }
 
-  /* ---------- Scroll reveals (IntersectionObserver: reliable, replays on entry) ---------- */
+  /* ---------- Scroll reveals (scroll-driven, reveal-once; robust on fast scroll) ---------- */
   function initReveals() {
-    if (reduced || !window.gsap || !window.IntersectionObserver) return;
-    // (called via whenGsap so window.gsap is guaranteed present here)
+    if (reduced || !window.gsap) return;
 
-    function headingLS(h) { return h.getAttribute('data-ls') || getComputedStyle(h).letterSpacing; }
-
-    function hide(sec) {
-      var h = sec.querySelector('h2');
-      if (h) { gsap.killTweensOf(h); gsap.set(h, { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' }); }
-      var kids = sec.__kids;
-      if (kids && kids.length) { gsap.killTweensOf(kids); gsap.set(kids, { opacity: 0, y: 26 }); }
-    }
     function show(sec) {
       var h = sec.querySelector('h2');
       if (h) {
-        gsap.killTweensOf(h);
         gsap.fromTo(h,
           { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' },
-          { opacity: 1, letterSpacing: headingLS(h), filter: 'blur(0px)', duration: 1.1, ease: 'power3.out' });
+          { opacity: 1, letterSpacing: h.getAttribute('data-ls') || getComputedStyle(h).letterSpacing,
+            filter: 'blur(0px)', duration: 1.0, ease: 'power3.out' });
       }
-      var kids = sec.__kids;
-      if (kids && kids.length) {
-        gsap.killTweensOf(kids);
-        gsap.fromTo(kids, { opacity: 0, y: 26 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out' });
+      if (sec.__kids && sec.__kids.length) {
+        gsap.fromTo(sec.__kids, { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.65, stagger: 0.06, ease: 'power2.out' });
       }
     }
 
-    // Hero name: same reveal, once on load
+    // Hero name: same reveal style, once on load
     var h1 = document.querySelector('#sec-hero h1');
     if (h1) {
       gsap.fromTo(h1,
@@ -84,20 +73,30 @@
           duration: 1.1, ease: 'power3.out' });
     }
 
-    var secs = IDS.slice(1).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-    secs.forEach(function (sec) {
+    var pending = IDS.slice(1).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    pending.forEach(function (sec) {
       var h = sec.querySelector('h2');
-      if (h) h.setAttribute('data-ls', getComputedStyle(h).letterSpacing); // capture natural spacing before hiding
+      if (h) { h.setAttribute('data-ls', getComputedStyle(h).letterSpacing); gsap.set(h, { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' }); }
       sec.__kids = Array.prototype.filter.call(sec.children, function (el) { return el !== h; });
-      hide(sec);
+      if (sec.__kids.length) gsap.set(sec.__kids, { opacity: 0, y: 24 });
     });
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) show(e.target); else hide(e.target);
-      });
-    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
-    secs.forEach(function (sec) { io.observe(sec); });
+    var ticking = false;
+    function check() {
+      ticking = false;
+      var line = window.innerHeight * 0.85;
+      for (var i = pending.length - 1; i >= 0; i--) {
+        if (pending[i].getBoundingClientRect().top < line) {
+          show(pending[i]);
+          pending.splice(i, 1);
+        }
+      }
+    }
+    check(); // reveal whatever is already in view on load
+    window.addEventListener('scroll', function () {
+      if (!ticking && pending.length) { ticking = true; requestAnimationFrame(check); }
+    }, { passive: true });
+    window.addEventListener('resize', check);
   }
 
   /* ---------- Plexus background ---------- */
