@@ -46,53 +46,57 @@
     update();
   }
 
-  /* ---------- Scroll reveals (all headings identical; replay on entry) ---------- */
+  /* ---------- Scroll reveals (IntersectionObserver: reliable, replays on entry) ---------- */
   function initReveals() {
-    if (!window.gsap || !window.ScrollTrigger || reduced) return;
-    gsap.registerPlugin(ScrollTrigger);
+    if (reduced || !window.gsap || !window.IntersectionObserver) return;
 
-    function hideHeading(h) { gsap.set(h, { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' }); }
-    function showHeading(h, ls) {
-      gsap.killTweensOf(h);
-      gsap.fromTo(h,
-        { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' },
-        { opacity: 1, letterSpacing: ls, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out' });
-    }
+    function headingLS(h) { return h.getAttribute('data-ls') || getComputedStyle(h).letterSpacing; }
 
-    // Hero name: same animation as section headings, plays once on load
-    var hero = document.getElementById('sec-hero');
-    var h1 = hero ? hero.querySelector('h1') : null;
-    if (h1) showHeading(h1, getComputedStyle(h1).letterSpacing);
-
-    IDS.slice(1).forEach(function (id) {
-      var sec = document.getElementById(id);
-      if (!sec) return;
+    function hide(sec) {
       var h = sec.querySelector('h2');
-      var ls = h ? getComputedStyle(h).letterSpacing : null;
-      var kids = Array.prototype.filter.call(sec.children, function (el) { return el !== h; });
-
-      function reset() {
-        if (h) { gsap.killTweensOf(h); hideHeading(h); }
-        if (kids.length) { gsap.killTweensOf(kids); gsap.set(kids, { opacity: 0, y: 26 }); }
-      }
-      function play() {
-        if (h) showHeading(h, ls);
-        if (kids.length) {
-          gsap.killTweensOf(kids);
-          gsap.fromTo(kids, { opacity: 0, y: 26 },
-            { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out' });
-        }
-      }
-
-      reset();
-      ScrollTrigger.create({
-        trigger: sec, start: 'top 80%', end: 'bottom 15%',
-        onEnter: play, onEnterBack: play, onLeave: reset, onLeaveBack: reset
-      });
-    });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+      if (h) { gsap.killTweensOf(h); gsap.set(h, { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' }); }
+      var kids = sec.__kids;
+      if (kids && kids.length) { gsap.killTweensOf(kids); gsap.set(kids, { opacity: 0, y: 26 }); }
     }
+    function show(sec) {
+      var h = sec.querySelector('h2');
+      if (h) {
+        gsap.killTweensOf(h);
+        gsap.fromTo(h,
+          { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' },
+          { opacity: 1, letterSpacing: headingLS(h), filter: 'blur(0px)', duration: 1.1, ease: 'power3.out' });
+      }
+      var kids = sec.__kids;
+      if (kids && kids.length) {
+        gsap.killTweensOf(kids);
+        gsap.fromTo(kids, { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out' });
+      }
+    }
+
+    // Hero name: same reveal, once on load
+    var h1 = document.querySelector('#sec-hero h1');
+    if (h1) {
+      gsap.fromTo(h1,
+        { opacity: 0, letterSpacing: '0.24em', filter: 'blur(8px)' },
+        { opacity: 1, letterSpacing: getComputedStyle(h1).letterSpacing, filter: 'blur(0px)',
+          duration: 1.1, ease: 'power3.out' });
+    }
+
+    var secs = IDS.slice(1).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    secs.forEach(function (sec) {
+      var h = sec.querySelector('h2');
+      if (h) h.setAttribute('data-ls', getComputedStyle(h).letterSpacing); // capture natural spacing before hiding
+      sec.__kids = Array.prototype.filter.call(sec.children, function (el) { return el !== h; });
+      hide(sec);
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) show(e.target); else hide(e.target);
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    secs.forEach(function (sec) { io.observe(sec); });
   }
 
   /* ---------- Plexus background ---------- */
