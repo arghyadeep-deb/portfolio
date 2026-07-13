@@ -160,8 +160,8 @@
       var outer = makeSphere(120, 0.9);
       var inner = makeSphere(70, 0.86);
       var globes = [
-        { data: outer, R: S * 0.36, ph: 0.0,  dot: 1.7, tilt: 0 },
-        { data: inner, R: S * 0.22, ph: 1.1,  dot: 1.4, tilt: 0.5 }
+        { data: outer, R: S * 0.36, ph: 0.0, dot: 1.7, auto: false, spd: 0 },
+        { data: inner, R: S * 0.22, ph: 1.1, dot: 1.4, auto: true,  spd: 0.010 }
       ];
 
       // rotation eased toward cursor
@@ -178,9 +178,11 @@
         trx = -0.3 + Math.max(-1, Math.min(1, (e.beta || 0) / 45)) * 0.7;
       });
 
-      function drawGlobe(g, rxx, ryy) {
+      function drawGlobe(g, rxx, ryy, autoAng) {
         var d = g.data, R = g.R, proj = new Array(d.pts.length), i;
-        var ryG = ryy + g.ph, rxG = rxx + g.tilt * ryy * 0.3;
+        var ryG, rxG;
+        if (g.auto) { ryG = autoAng + g.ph; rxG = -0.45; }
+        else { ryG = ryy + g.ph; rxG = rxx; }
         var cy = Math.cos(ryG), sy = Math.sin(ryG), cx = Math.cos(rxG), sx = Math.sin(rxG);
         for (i = 0; i < d.pts.length; i++) {
           var pnt = d.pts[i];
@@ -202,15 +204,19 @@
         }
       }
 
+      var spinAng = 0;
       function render() {
         ctx.clearRect(0, 0, S, S);
-        for (var gi = 0; gi < globes.length; gi++) drawGlobe(globes[gi], rx, ry);
+        for (var gi = 0; gi < globes.length; gi++) {
+          drawGlobe(globes[gi], rx, ry, spinAng * (globes[gi].spd / 0.010 || 1));
+        }
       }
 
       if (reduced) { render(); return; }
       (function loop() {
         rx += (trx - rx) * 0.06;
         ry += (try_ - ry) * 0.06;
+        spinAng += 0.010;
         render();
         requestAnimationFrame(loop);
       })();
