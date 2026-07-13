@@ -102,8 +102,13 @@ a:hover { color: var(--text); }
 }
 h1 {
   margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700;
-  font-size: 118px; line-height: 0.95; letter-spacing: 0.04em;
-  color: var(--text); text-transform: uppercase;
+  font-size: 104px; line-height: 1; letter-spacing: 0.04em;
+  color: var(--text); text-transform: uppercase; white-space: nowrap;
+  animation: name-in 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes name-in {
+  0%   { opacity: 0; letter-spacing: 0.3em; filter: blur(10px); }
+  100% { opacity: 1; letter-spacing: 0.04em; filter: blur(0); }
 }
 h2 {
   margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700;
@@ -290,7 +295,7 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
   }
   .sec { position: static !important; width: auto !important; }
   .sec--boxed { padding: 28px 20px; }
-  h1 { font-size: 56px; }
+  h1 { font-size: 10vw; }
   h2 { font-size: 40px; }
   h2.xl { font-size: 48px; }
   .lede { font-size: 18px; }
@@ -307,5 +312,6 @@ h2.xl { font-size: 84px; letter-spacing: 0.06em; text-transform: none; }
   .ring { animation: none; }
   .scroll-cue { animation: none; }
   .viewport { animation: none; }
+  h1 { animation: none; }
   .card, .module, .skill-tags span { transition: none; }
 }
