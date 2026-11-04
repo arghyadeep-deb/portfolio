@@ -11,21 +11,21 @@ Single-page dark portfolio showcasing AI/ML expertise, projects, and experience 
 - **Scroll-reveal animations** — tracking-in headings and staggered fade-up content
 - **Plexus network background** (animated particle system with connection lines)
 - **Responsive design** (mobile-first fallback to plain vertical layout)
-- **No dependencies** beyond GSAP (loaded via CDN)
-- **SEO-ready** (Open Graph, Twitter Cards, JSON-LD schema)
-- **Accessible** (ARIA labels, screen reader hidden decorative elements)
+- **Only external dependencies:** GSAP (CDN) and Google Fonts
+- **Share-ready:** Open Graph and Twitter large-card image (`og-image.png`), canonical URL, JSON-LD schema
+- **Accessibility basics:** skip link, visible keyboard focus, reduced-motion support, decorative canvases hidden from screen readers
 
-## Project Links
+## Projects shown on the site
 
-- **AI Financial Advisor** — Multi-agent financial advisory with Graph-RAG
-  - [GitHub](https://github.com/arghyadeep-deb/AI-Financial-Advisor)
-  - Tech: LangGraph, Graph-RAG, FastAPI, Streamlit
-
-- **Credit Scoring System** — Hybrid ML/DL credit risk prediction
-  - [GitHub](https://github.com/arghyadeep-deb/Credit-Scoring-System)
-  - Tech: XGBoost, PyTorch, SHAP, FastAPI
-
-- **Grove** — Agentic thinking & memory tool (internship, under NDA)
+- **Grove** — AI layer and FastAPI backend of a thinking-to-knowledge platform (internship, code under NDA)
+- **AI Financial Advisor** — multi-agent advisory platform with Graph-RAG
+  - [Live](https://ai-financial-advisor-summarizer.streamlit.app) · [GitHub](https://github.com/arghyadeep-deb/AI-Financial-Advisor)
+- **Fairness-Aware Credit Scoring** — TabTransformer with a joint fairness/calibration loss (B.Tech major project)
+  - [Live demo](https://fairness-aware-credit-scoring.onrender.com/) · [GitHub](https://github.com/arghyadeep-deb/fairness-aware-credit-scoring)
+- **Hybrid Movie Recommender** — TF-IDF + SVD item-to-item recommender
+  - [GitHub](https://github.com/arghyadeep-deb/Hybrid-Movie-Recommender-System)
+- **V.E.C.T.O.R.** — flagship multi-agent system, with per-module status labels
+  - [GitHub](https://github.com/arghyadeep-deb/VECTOR)
 
 ## Run Locally
 
