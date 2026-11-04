@@ -357,3 +357,22 @@ a:focus-visible, button:focus-visible {
   .about-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .about-photo { max-width: 220px; position: static; }
 }
+
+/* ===== Mobile polish ===== */
+@media (max-width: 760px) {
+  .topbar { padding-left: 14px; padding-right: 14px; gap: 10px; }
+  .brand { font-size: 11px; letter-spacing: 0.12em; white-space: nowrap; }
+  .resume-btn { white-space: nowrap; font-size: 11px; letter-spacing: 0.12em; padding: 7px 10px; }
+  .navbar {
+    left: 0; right: 0; margin: 0 auto; transform: none;
+    width: fit-content; max-width: calc(100vw - 24px);
+    gap: 4px; padding: 4px 10px; overflow-x: visible;
+  }
+  .navbar button { padding: 12px 6px; }
+  .sec--boxed { padding: 24px 18px; border-radius: 18px; }
+  .card { padding: 20px; }
+  .card header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .card .badge { text-align: left; }
+  .sec--hero { padding: 0 8px; }
+  .connect .val { white-space: normal; overflow-wrap: anywhere; }
+}
