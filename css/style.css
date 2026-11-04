@@ -346,3 +346,14 @@ a:focus-visible, button:focus-visible {
   .card, .skill-box, .module { min-width: 0; }
   .card p, .xp-desc, .about-text { overflow-wrap: anywhere; }
 }
+
+/* About photo */
+.about-grid { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 44px; align-items: start; }
+.about-body { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.about-body .about-text { margin: 0; }
+.about-photo { margin: 0; border: 1px solid var(--line); padding: 8px; background: var(--card); position: sticky; top: 110px; }
+.about-photo img { display: block; width: 100%; height: auto; aspect-ratio: 520 / 666; object-fit: cover; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .about-photo { max-width: 220px; position: static; }
+}
