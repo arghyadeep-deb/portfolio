@@ -93,24 +93,24 @@
     <div class="mono-sub">VIRTUAL ENTITY FOR COGNITIVE TASKS &amp; OPERATIONAL REASONING</div>
     <p class="sub">An autonomous multi-agent AI system built solo from the ground up — a governed city of specialized agents that sense, decide, act, and evolve, with every action passing through a permission layer.</p>
     <div class="modules">
-      <div class="module"><span class="tag">M-01</span><span class="name">Agent city</span><span class="desc">41 configured districts and 274 registered agents — research, coding, finance, security, ops</span>
+      <div class="module"><span class="tag">M-01</span><span class="name">Agent city</span><span class="desc">41 districts and 274 agents defined in the manifest — research, coding, finance, security, ops</span>
       <span class="st st--done">IMPLEMENTED</span></div>
-      <div class="module"><span class="tag">M-02</span><span class="name">Agent evolution</span><span class="desc">Darwinian selection — performance-based HP, council governance</span>
+      <div class="module"><span class="tag">M-02</span><span class="name">Agent evolution</span><span class="desc">Darwinian selection — performance-based HP, death and respawn, 3-stage LLM council, XP/lineage ledger that can raise an agent's model tier</span>
       <span class="st st--done">IMPLEMENTED</span></div>
-      <div class="module"><span class="tag">M-03</span><span class="name">Decision engine</span><span class="desc">Actions chosen by multi-candidate scoring, not single LLM calls</span>
+      <div class="module"><span class="tag">M-03</span><span class="name">Decision engine</span><span class="desc">Weighted multi-factor scoring (goal, confidence, policy, urgency, timing, cost) ranks candidate actions on the autonomous loop</span>
       <span class="st st--done">IMPLEMENTED</span></div>
-      <div class="module"><span class="tag">M-04</span><span class="name">Permission gateway</span><span class="desc">Every action risk-tiered GREEN / YELLOW / RED before execution</span>
+      <div class="module"><span class="tag">M-04</span><span class="name">Permission gateway</span><span class="desc">Actions risk-tiered GREEN / YELLOW / RED / FORBIDDEN, with fail-closed approvals and phone-tap sign-off for money, deploys and deletes</span>
       <span class="st st--done">IMPLEMENTED</span></div>
-      <div class="module"><span class="tag">M-05</span><span class="name">Memory &amp; reflection</span><span class="desc">Nightly consolidation, self-review, and pattern extraction</span>
+      <div class="module"><span class="tag">M-05</span><span class="name">Memory &amp; reflection</span><span class="desc">Nightly consolidation and self-review run at 2 AM; pattern extraction is built but runs on demand only</span>
+      <span class="st st--wip">PARTIAL</span></div>
+      <div class="module"><span class="tag">M-06</span><span class="name">Ambient sensing</span><span class="desc">Always-on edge node on a repurposed phone — Termux server with HMAC auth, motion/camera/mic loops, and on-device person detection with Telegram photo alerts</span>
       <span class="st st--done">IMPLEMENTED</span></div>
-      <div class="module"><span class="tag">M-06</span><span class="name">Ambient sensing</span><span class="desc">Always-on edge node on a repurposed phone — bridge code written, deployment pending</span>
-      <span class="st st--wip">IN PROGRESS</span></div>
-      <div class="module"><span class="tag">M-07</span><span class="name">Device control</span><span class="desc">Voice, chat and browser/vision control of the PC; phone control still to come</span>
-      <span class="st st--wip">IN PROGRESS</span></div>
-      <div class="module"><span class="tag">M-08</span><span class="name">Self-evolution</span><span class="desc">Self-update logic with an evolution audit trail and rollback</span>
+      <div class="module"><span class="tag">M-07</span><span class="name">Device control</span><span class="desc">Voice, chat and browser/vision control of the PC, plus ADB phone control used in production to post Instagram Reels</span>
       <span class="st st--done">IMPLEMENTED</span></div>
+      <div class="module"><span class="tag">M-08</span><span class="name">Self-evolution</span><span class="desc">Weekly LoRA self-training pipeline with evaluation reject-gates; audit trail and rollback are not yet wired into it</span>
+      <span class="st st--wip">PARTIAL</span></div>
     </div>
-    <p class="legend">IMPLEMENTED = code in the repository. Live-run verification of each module is tracked in the repo's open-issues log.</p>
+    <p class="legend">IMPLEMENTED = built and running. PARTIAL = working pieces, with known gaps tracked in the repo's open-issues log.</p>
     <div class="vlinks"><a href="https://github.com/arghyadeep-deb/VECTOR" target="_blank" rel="noopener">VIEW ON GITHUB ↗</a></div>
   </section>
 
